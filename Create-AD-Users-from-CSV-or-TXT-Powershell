@@ -5,7 +5,6 @@ $USER_FIRST_LAST_LIST = Get-Content .\UserData.txt
 
 $password = ConvertTo-SecureString $PASSWORD_FOR_USERS -AsPlainText -Force
 
-
 foreach ($n in $USER_FIRST_LAST_LIST) {
     $first = $n.Split(" ")[0].ToUpper()
     $last = $n.Split(" ")[1].ToUpper()

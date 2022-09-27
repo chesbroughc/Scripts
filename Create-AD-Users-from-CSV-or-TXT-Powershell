@@ -1,5 +1,5 @@
 # ----- Edit these Variables for your own Use Case ----- #
-$PASSWORD_FOR_USERS   = "testpass123!"
+$PASSWORD_FOR_USERS   = "testpassword123!"
 $USER_FIRST_LAST_LIST = Get-Content .\UserData.txt
 # ------------------------------------------------------ #
 
@@ -9,19 +9,16 @@ $password = ConvertTo-SecureString $PASSWORD_FOR_USERS -AsPlainText -Force
 foreach ($n in $USER_FIRST_LAST_LIST) {
     $first = $n.Split(" ")[0].ToUpper()
     $last = $n.Split(" ")[1].ToUpper()
-    $rank = $n.Split(" ")[2].ToUpper()
-    $USAR = "USARMY 593d ESC"
-    $username = "$($last), $($first) $($rank) $($USAR)".ToUpper()
+    $username = "$($last), $($first)".ToUpper()
 
     Write-Host "Creating user: $($username)" -BackgroundColor Black -ForegroundColor Cyan
     
     New-AdUser -AccountPassword $password `
                -GivenName $first `
                -Surname $last `
-               -DisplayName "$($last), $($first) $($rank) $($USAR)" `
+               -DisplayName "$($last), $($first)" `
                -SamAccountName "$($first).$($last)" `
                -Name $username `
-               -PasswordNeverExpires $true `
                -Path "OU=test_ou,$(([ADSI]`"").distinguishedName)" `
                -Enabled $true
 }

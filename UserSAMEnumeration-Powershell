@@ -1,0 +1,3 @@
+*Enumerates all user SAM names within a domain*
+
+Get-ADUser -Filter * -Properties * | Select-Object name | export-csv -path c:\users.csv
